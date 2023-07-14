@@ -1,3 +1,5 @@
+import BookGrid from "../components/BookGrid";
+
 const Home = () => {
   return (
     <>
@@ -11,6 +13,25 @@ const Home = () => {
               et a id nisi.
             </p>
             <button className="btn btn-primary">Get Started</button>
+          </div>
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="py-16">
+          <div className="text-center pb-8">
+            <h2 className="text-xl font-semibold">Recently Added Books</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            <BookGrid />
+            <BookGrid />
+            <BookGrid />
+            <BookGrid />
+          </div>
+          <div className="text-center pt-16">
+            <button className="btn btn-primary btn-sm text-xs px-16">
+              View More
+            </button>
           </div>
         </div>
       </div>
