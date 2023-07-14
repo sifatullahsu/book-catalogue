@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 shadow-sm">
       <div className="container">
         <div className="navbar">
           <div className="navbar-start">
