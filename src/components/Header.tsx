@@ -1,18 +1,20 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   const menu = () => {
     return (
       <>
         <li>
-          <a>Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <a>All Books</a>
+          <Link to="all-books">All Books</Link>
         </li>
         <li>
-          <a>SignIn</a>
+          <Link to="/signin">SignIn</Link>
         </li>
         <li>
-          <a>SignUp</a>
+          <Link to="/signup">SignUp</Link>
         </li>
       </>
     );
