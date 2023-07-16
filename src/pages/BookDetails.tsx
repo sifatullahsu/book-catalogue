@@ -2,40 +2,36 @@ import { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { HiOutlineBookOpen } from "react-icons/hi";
+import { useParams } from "react-router-dom";
+import { useGetBookQuery } from "../redux/features/book/bookApi";
+import { iBook } from "../types/globalTypes";
 
 const BookDetails = () => {
-  const [isVisitor] = useState(false);
+  const { id } = useParams();
+  const { data, isLoading } = useGetBookQuery(id);
+  const [isVisitor] = useState(true);
+
+  if (isLoading) return <div>loading</div>;
+
+  const book: iBook = data.data;
 
   return (
     <>
       <div className="container relative">
         <div className="p-5 pt-14 md:p-8 lg:p-16">
           <HiOutlineBookOpen className="text-lg"></HiOutlineBookOpen>
-          <h2 className="text-lg font-semibold">Shoes!</h2>
+          <h2 className="text-lg font-semibold">{book?.name}</h2>
 
           <p className="text-sm">
-            By <span className="hover:underline">Shadat Hossain</span>
+            By <span className="hover:underline">{book?.author}</span>
           </p>
 
           <div className="text-sm font-medium my-5">
-            <p>Genre: Fiction</p>
-            <p>Publication Date: 25-02-2023</p>
+            <p>Genre: {book?.genre}</p>
+            <p>Publication Date: {book?.publicationDate}</p>
           </div>
 
-          <div>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et,
-              fugiat repellendus magni, repudiandae incidunt earum, error sunt
-              sapiente maiores facere quibusdam perspiciatis voluptatibus
-              architecto aliquid vitae sint maxime. Cum necessitatibus, quis
-              quam incidunt aperiam odio impedit praesentium quaerat voluptatem
-              aut velit, beatae, provident ad corporis animi soluta fugiat
-              accusantium minus illum totam. Sequi nostrum possimus temporibus
-              doloremque quibusdam amet optio quas ipsam delectus dolorum
-              distinctio veritatis rerum voluptate labore, itaque nesciunt!
-              Sequi, minima provident eos incidunt maiores velit et itaque.
-            </p>
-          </div>
+          <div>{book?.summery}</div>
           <div className="space-x-1 absolute top-10 right-5">
             <button
               disabled={true}
