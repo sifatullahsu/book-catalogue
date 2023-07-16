@@ -37,9 +37,7 @@ const BookForm = () => {
           <span className="label-text">Genre</span>
         </label>
         <select name="genre" className="select select-sm select-bordered">
-          <option disabled selected>
-            Pick one
-          </option>
+          <option disabled>Pick one</option>
           <option>Star Wars</option>
           <option>Harry Potter</option>
           <option>Lord of the Rings</option>

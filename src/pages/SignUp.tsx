@@ -9,6 +9,16 @@ const SignUp = () => {
           </div>
           <div className="form-control w-full max-w-xs">
             <label className="label">
+              <span className="label-text">Name</span>
+            </label>
+            <input
+              type="text"
+              name="name"
+              className="input input-sm input-bordered w-full max-w-xs"
+            />
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
               <span className="label-text">Email</span>
             </label>
             <input
