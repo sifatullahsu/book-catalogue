@@ -3,6 +3,7 @@ import Main from "../layouts/Main";
 import AddNewBook from "../pages/AddNewBook";
 import AllBooks from "../pages/AllBooks";
 import BookDetails from "../pages/BookDetails";
+import EditBook from "../pages/EditBook";
 import Home from "../pages/Home";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
@@ -23,6 +24,10 @@ const routes = createBrowserRouter([
       {
         path: "/all-books/:id",
         element: <BookDetails />,
+      },
+      {
+        path: "/all-books/:id/edit",
+        element: <EditBook />,
       },
       {
         path: "/signin",
