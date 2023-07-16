@@ -1,12 +1,15 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { useGetUserQuery } from "../redux/features/user/userApi";
 import { useAppSelector } from "../redux/hooks";
 
 const Main = () => {
   const { data } = useAppSelector((state) => state.user);
-
   console.log(data);
+
+  const { data: user } = useGetUserQuery("64b36acf1221991f508c64b5");
+  console.log(user);
 
   return (
     <>
