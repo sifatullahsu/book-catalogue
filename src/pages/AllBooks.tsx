@@ -1,6 +1,10 @@
 import BookGrid from "../components/BookGrid";
+import { useGetBooksQuery } from "../redux/features/book/bookApi";
+import { iBook } from "../types/globalTypes";
 
 const AllBooks = () => {
+  const { data } = useGetBooksQuery(undefined);
+
   return (
     <>
       <div className="container">
@@ -9,14 +13,9 @@ const AllBooks = () => {
             <h2 className="text-xl font-semibold">All Books</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            <BookGrid />
-            <BookGrid />
-            <BookGrid />
-            <BookGrid />
-            <BookGrid />
-            <BookGrid />
-            <BookGrid />
-            <BookGrid />
+            {data?.data?.map((book: iBook) => (
+              <BookGrid key={book._id} book={book}></BookGrid>
+            ))}
           </div>
         </div>
       </div>
