@@ -1,24 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEvent } from "react";
 import { toast } from "react-hot-toast";
-import { AiOutlineDelete } from "react-icons/ai";
+import {
+  AiOutlineAppstoreAdd,
+  AiOutlineDelete,
+  AiOutlineHeart,
+} from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { HiOutlineBookOpen } from "react-icons/hi";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   useCreateCommentMutation,
+  useDeleteBookMutation,
   useGetBookQuery,
   useGetCommentQuery,
 } from "../redux/features/book/bookApi";
+import { useUpdateUserWishlistMutation } from "../redux/features/user/userApi";
 import { useAppSelector } from "../redux/hooks";
 import { iBook, iComment } from "../types/globalTypes";
 
 const BookDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { data, isLoading } = useGetBookQuery(id);
   const { data: comment } = useGetCommentQuery(id);
   const { data: user } = useAppSelector((state) => state.user);
   const [createComment] = useCreateCommentMutation();
+  const [updateUserWishlist] = useUpdateUserWishlistMutation();
+  const [deleteBook] = useDeleteBookMutation();
 
   if (isLoading) return <div>loading</div>;
 
@@ -48,6 +57,23 @@ const BookDetails = () => {
       }
     });
   };
+
+  const handleDelete = async () => {
+    const isConfirm = window.confirm();
+
+    if (isConfirm) {
+      await deleteBook(id);
+      toast.success("Book delete successfull.");
+      navigate("/all-books");
+    }
+  };
+
+  const handleWishlist = async () => {
+    await updateUserWishlist({ id: user?._id, data: { wishlist: id } });
+    toast.success("Wishlist added successfull.");
+  };
+
+  // const handleReading = () => {};
 
   return (
     <>
@@ -87,10 +113,20 @@ const BookDetails = () => {
               </button>
             )}
             <button
+              onClick={handleDelete}
               disabled={!isAuthorized}
               className="btn btn-sm btn-ghost px-1 text-2xl "
             >
               <AiOutlineDelete />
+            </button>
+            <button
+              onClick={handleWishlist}
+              className="btn btn-sm btn-ghost px-1 text-2xl "
+            >
+              <AiOutlineHeart />
+            </button>
+            <button className="btn btn-sm btn-ghost px-1 text-2xl ">
+              <AiOutlineAppstoreAdd />
             </button>
           </div>
 

@@ -12,6 +12,13 @@ const userApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    updateUserWishlist: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/api/v1/users/${id as string}/wishlist`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
     signUpUser: builder.mutation({
       query: (data) => ({
         url: `/api/v1/auth/signup`,
@@ -40,6 +47,7 @@ const userApi = api.injectEndpoints({
 export const {
   useGetUserQuery,
   useUpdateUserMutation,
+  useUpdateUserWishlistMutation,
   useSignUpUserMutation,
   useSignInUserMutation,
   useGetMeQuery,

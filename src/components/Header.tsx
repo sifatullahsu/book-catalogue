@@ -48,7 +48,7 @@ const Header = () => {
     <div className="bg-gray-100 shadow-sm">
       <div className="container">
         <div className="navbar">
-          <div className="navbar-start">
+          <div className="navbar-start w-1/4">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
                 <svg
@@ -75,7 +75,7 @@ const Header = () => {
             </div>
             <a className="normal-case text-lg font-medium">BookCatalogue</a>
           </div>
-          <div className="navbar-end">
+          <div className="navbar-end w-3/4">
             <ul className="menu menu-horizontal hidden lg:flex">{menu()}</ul>
           </div>
         </div>

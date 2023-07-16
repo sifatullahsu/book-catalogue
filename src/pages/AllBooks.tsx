@@ -4,7 +4,7 @@ import { useGetBooksQuery } from "../redux/features/book/bookApi";
 import { genre, iBook } from "../types/globalTypes";
 
 const AllBooks = () => {
-  const [query, setQuery] = useState(undefined);
+  const [query, setQuery] = useState("undefined");
   const { data, isLoading } = useGetBooksQuery(query, {
     refetchOnMountOrArgChange: true,
   });
@@ -26,7 +26,8 @@ const AllBooks = () => {
       query.push(`&publicationDate=${year}`);
     }
 
-    setQuery(query.join(""));
+    const finalQuery = query.join("");
+    setQuery(finalQuery);
   };
 
   if (isLoading) return <div>loading</div>;

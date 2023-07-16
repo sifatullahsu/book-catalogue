@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { useAppSelector } from "../redux/hooks";
 import { genre, iBook } from "../types/globalTypes";
 
 type iProps = {
@@ -13,6 +14,10 @@ const BookForm = ({ data, handler }: iProps) => {
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
+
+  const { data: user } = useAppSelector((state) => state.user);
+
+  const isAuthorized = data?.user === user?._id;
 
   return (
     <form onSubmit={handler}>
@@ -80,11 +85,17 @@ const BookForm = ({ data, handler }: iProps) => {
       </div>
 
       <button
+        disabled={data ? !isAuthorized : false}
         type="submit"
         className="btn btn-primary btn-sm text-xs px-16 mt-5"
       >
         {data ? "Update Book" : "Add New Book"}
       </button>
+      {!isAuthorized && (
+        <div className="text-sm text-red-600">
+          You are not authorized your to update the book.
+        </div>
+      )}
     </form>
   );
 };
