@@ -1,14 +1,25 @@
+import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { useGetMeQuery } from "../redux/features/user/userApi";
+import { setUser } from "../redux/features/user/userSlice";
+import { useAppDispatch } from "../redux/hooks";
 
 const Main = () => {
-  // const { data } = useAppSelector((state) => state.user);
-  // console.log(data);
+  const dispatch = useAppDispatch();
 
-  // const { data: user } = useGetUserQuery("64b36acf1221991f508c64b5");
-  // console.log(user);
+  const token = localStorage.getItem("token");
+  const { data, isLoading } = useGetMeQuery(token);
+
+  useEffect(() => {
+    if (data?.data?._id) {
+      dispatch(setUser(data.data));
+    }
+  }, [data, dispatch]);
+
+  if (isLoading) return <div>loading</div>;
 
   return (
     <>

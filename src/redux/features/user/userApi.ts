@@ -26,6 +26,14 @@ const userApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    getMe: builder.query({
+      query: (token) => ({
+        url: "/api/v1/auth/me",
+        headers: {
+          authorization: token,
+        },
+      }),
+    }),
   }),
 });
 
@@ -34,4 +42,5 @@ export const {
   useUpdateUserMutation,
   useSignUpUserMutation,
   useSignInUserMutation,
+  useGetMeQuery,
 } = userApi;
