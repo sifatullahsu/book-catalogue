@@ -1,6 +1,37 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+import { ChangeEvent } from "react";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useSignInUserMutation } from "../redux/features/user/userApi";
+
 const SignIn = () => {
+  const [signInUser] = useSignInUserMutation();
+  const navigate = useNavigate();
+
+  const handleSignIn = async (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.target;
+
+    const data = {
+      email: form.email.value,
+      password: form.password.value,
+    };
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await signInUser(data).then((data: any) => {
+      if (data?.data) {
+        toast.success("Login Successfull.");
+        form.reset();
+        navigate("/");
+        localStorage.setItem("token", data?.data.data.accessToken);
+      } else if (data?.error) {
+        toast.error(data.error?.data?.message);
+      }
+    });
+  };
+
   return (
-    <>
+    <form onSubmit={handleSignIn}>
       <div className="container">
         <div className="p-5 md:p-8 lg:p-16">
           <div className="mb-5">
@@ -32,7 +63,7 @@ const SignIn = () => {
           </button>
         </div>
       </div>
-    </>
+    </form>
   );
 };
 
