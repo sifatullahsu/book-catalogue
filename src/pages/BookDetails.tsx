@@ -11,7 +11,7 @@ const BookDetails = () => {
   const { data, isLoading } = useGetBookQuery(id);
 
   const [isVisitor] = useState(true);
-  const [isAuthorized] = useState(true);
+  const [isAuthorized] = useState(false);
 
   if (isLoading) return <div>loading</div>;
 
@@ -31,20 +31,29 @@ const BookDetails = () => {
           <div className="text-sm font-medium my-5">
             <p>Genre: {book?.genre}</p>
             <p>
-              Publication Date:{" "}
+              Publication Date:
               {new Date(book?.publicationDate).toLocaleDateString()}
             </p>
           </div>
 
           <div>{book?.summery}</div>
           <div className="space-x-1 absolute top-10 right-5">
-            <Link
-              to={`/all-books/${id as string}/edit`}
-              disabled={!isAuthorized}
-              className="btn btn-sm btn-ghost px-1 text-2xl "
-            >
-              <BiEdit />
-            </Link>
+            <button disabled={!isAuthorized}></button>
+            {isAuthorized ? (
+              <Link
+                to={`/all-books/${id as string}/edit`}
+                className="btn btn-sm btn-ghost px-1 text-2xl "
+              >
+                <BiEdit />
+              </Link>
+            ) : (
+              <button
+                disabled={!isAuthorized}
+                className="btn btn-sm btn-ghost px-1 text-2xl "
+              >
+                <BiEdit />
+              </button>
+            )}
             <button
               disabled={!isAuthorized}
               className="btn btn-sm btn-ghost px-1 text-2xl "

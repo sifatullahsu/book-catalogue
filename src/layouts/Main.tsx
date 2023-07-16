@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -14,6 +15,7 @@ const Main = () => {
       <Header />
       <Outlet />
       <Footer />
+      <Toaster />
     </>
   );
 };
