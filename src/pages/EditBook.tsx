@@ -45,6 +45,11 @@ const EditBook = () => {
             <p>Edit the form and submit to modify the book.</p>
           </div>
           <BookForm data={data?.data} handler={handleEditBook} />
+          {data.data.user !== user?._id && (
+            <div className="text-sm text-red-600 mt-5">
+              You are not authorized your to update the book.
+            </div>
+          )}
         </div>
       </div>
     </>

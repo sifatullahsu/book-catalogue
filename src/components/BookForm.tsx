@@ -85,17 +85,12 @@ const BookForm = ({ data, handler }: iProps) => {
       </div>
 
       <button
-        disabled={data ? !isAuthorized : false}
+        disabled={data ? !isAuthorized : user?._id ? false : true}
         type="submit"
         className="btn btn-primary btn-sm text-xs px-16 mt-5"
       >
         {data ? "Update Book" : "Add New Book"}
       </button>
-      {!isAuthorized && (
-        <div className="text-sm text-red-600">
-          You are not authorized your to update the book.
-        </div>
-      )}
     </form>
   );
 };

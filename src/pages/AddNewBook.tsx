@@ -35,6 +35,11 @@ const AddNewBook = () => {
             <p>Fill the form & submit to add a new Book.</p>
           </div>
           <BookForm handler={handleAddNewBook} />
+          {!user && (
+            <div className="text-sm text-red-600 mt-5">
+              You are not authorized your to create the book.
+            </div>
+          )}
         </div>
       </div>
     </>
