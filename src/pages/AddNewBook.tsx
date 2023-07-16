@@ -1,6 +1,29 @@
+import { ChangeEvent } from "react";
 import BookForm from "../components/BookForm";
+import { useCreateBookMutation } from "../redux/features/book/bookApi";
+import { iBook } from "../types/globalTypes";
 
 const AddNewBook = () => {
+  const [createBook] = useCreateBookMutation();
+
+  const handleAddNewBook = async (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.target;
+
+    const data: iBook = {
+      name: form.book_name.value,
+      author: form.author.value,
+      publicationDate: form.publication_date.value,
+      genre: form.genre.value,
+      summery: form.summery.value,
+      user: "dd",
+    };
+
+    await createBook(data)
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <div className="container">
@@ -9,7 +32,7 @@ const AddNewBook = () => {
             <h3 className="text-xl font-semibold">Add New Book</h3>
             <p>Fill the form & submit to add a new Book.</p>
           </div>
-          <BookForm />
+          <BookForm handler={handleAddNewBook} />
         </div>
       </div>
     </>

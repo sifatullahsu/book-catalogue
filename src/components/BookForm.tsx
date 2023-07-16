@@ -1,6 +1,14 @@
-const BookForm = () => {
+import { ChangeEvent } from "react";
+import { iBook } from "../types/globalTypes";
+
+type iProps = {
+  data?: iBook;
+  handler: (event: ChangeEvent<HTMLFormElement>) => void;
+};
+
+const BookForm = ({ data, handler }: iProps) => {
   return (
-    <div>
+    <form onSubmit={handler}>
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Book Name</span>
@@ -11,23 +19,25 @@ const BookForm = () => {
           className="input input-sm input-bordered w-full max-w-xs"
         />
       </div>
+
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Author</span>
         </label>
         <input
           type="text"
-          name="auhtor"
+          name="author"
           className="input input-sm input-bordered w-full max-w-xs"
         />
       </div>
+
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Publication Date</span>
         </label>
         <input
           type="date"
-          name="auhtor"
+          name="publication_date"
           className="input input-sm input-bordered w-full max-w-xs"
         />
       </div>
@@ -56,10 +66,13 @@ const BookForm = () => {
         ></textarea>
       </div>
 
-      <button className="btn btn-primary btn-sm text-xs px-16 mt-5">
-        Add New Book
+      <button
+        type="submit"
+        className="btn btn-primary btn-sm text-xs px-16 mt-5"
+      >
+        {data ? "Update Book" : "Add New Book"}
       </button>
-    </div>
+    </form>
   );
 };
 

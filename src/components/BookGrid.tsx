@@ -25,7 +25,7 @@ const BookGrid = ({ book }: iProps) => {
           </div>
           <div className="card-actions justify-end">
             <Link
-              to={`${book._id}`}
+              to={`/all-books/${book._id}`}
               className="btn btn-primary btn-sm w-full text-xs"
             >
               View Details

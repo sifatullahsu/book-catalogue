@@ -28,7 +28,10 @@ const BookDetails = () => {
 
           <div className="text-sm font-medium my-5">
             <p>Genre: {book?.genre}</p>
-            <p>Publication Date: {book?.publicationDate}</p>
+            <p>
+              Publication Date:{" "}
+              {new Date(book?.publicationDate).toLocaleDateString()}
+            </p>
           </div>
 
           <div>{book?.summery}</div>
