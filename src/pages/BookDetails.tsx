@@ -4,7 +4,7 @@ import { BiEdit } from "react-icons/bi";
 import { HiOutlineBookOpen } from "react-icons/hi";
 
 const BookDetails = () => {
-  const [isVisitor, setIsVisitor] = useState(false);
+  const [isVisitor] = useState(false);
 
   return (
     <>
