@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { iBook } from "../types/globalTypes";
+import { genre, iBook } from "../types/globalTypes";
 
 type iProps = {
   data?: iBook;
@@ -62,11 +62,9 @@ const BookForm = ({ data, handler }: iProps) => {
           defaultValue={data ? data.genre : "Pick one"}
         >
           <option disabled>Pick one</option>
-          <option>Star Wars</option>
-          <option>Harry Potter</option>
-          <option>Lord of the Rings</option>
-          <option>Planet of the Apes</option>
-          <option>Star Trek</option>
+          {genre.map((item: string) => (
+            <option key={item}>{item}</option>
+          ))}
         </select>
       </div>
 

@@ -14,3 +14,20 @@ export type iComment = {
   book: string;
   comment: string;
 };
+
+export type iGenre =
+  | "Fiction"
+  | "Novel"
+  | "Thriller"
+  | "Mystery"
+  | "Non-fiction"
+  | "Other";
+
+export const genre: iGenre[] = [
+  "Fiction",
+  "Mystery",
+  "Non-fiction",
+  "Novel",
+  "Thriller",
+  "Other",
+];

@@ -30,6 +30,12 @@ const Header = () => {
               <Link to="/add-new-book">Add New Book</Link>
             </li>
             <li>
+              <Link to="/wishlist">Wishlist</Link>
+            </li>
+            <li>
+              <Link to="/reading">Reading</Link>
+            </li>
+            <li>
               <button onClick={() => dispatch(logout())}>Logout</button>
             </li>
           </>
