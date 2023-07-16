@@ -7,3 +7,10 @@ export type iBook = {
   summery: string;
   user: string;
 };
+
+export type iComment = {
+  _id?: number;
+  user: string;
+  book: string;
+  comment: string;
+};

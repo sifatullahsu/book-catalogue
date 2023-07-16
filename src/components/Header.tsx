@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../redux/hooks";
+import { logout } from "../redux/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 const Header = () => {
   const { data: user } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
   const menu = () => {
     return (
@@ -28,7 +30,7 @@ const Header = () => {
               <Link to="/add-new-book">Add New Book</Link>
             </li>
             <li>
-              <button>Logout</button>
+              <button onClick={() => dispatch(logout())}>Logout</button>
             </li>
           </>
         )}

@@ -6,7 +6,7 @@ const api = createApi({
     baseUrl: "http://localhost:5000",
   }),
   endpoints: () => ({}),
-  tagTypes: ["books"],
+  tagTypes: ["books", "comment"],
 });
 
 export default api;
