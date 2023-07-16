@@ -2,14 +2,16 @@ import { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { HiOutlineBookOpen } from "react-icons/hi";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetBookQuery } from "../redux/features/book/bookApi";
 import { iBook } from "../types/globalTypes";
 
 const BookDetails = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetBookQuery(id);
+
   const [isVisitor] = useState(true);
+  const [isAuthorized] = useState(true);
 
   if (isLoading) return <div>loading</div>;
 
@@ -36,14 +38,15 @@ const BookDetails = () => {
 
           <div>{book?.summery}</div>
           <div className="space-x-1 absolute top-10 right-5">
-            <button
-              disabled={true}
+            <Link
+              to={`/all-books/${id as string}/edit`}
+              disabled={!isAuthorized}
               className="btn btn-sm btn-ghost px-1 text-2xl "
             >
               <BiEdit />
-            </button>
+            </Link>
             <button
-              disabled={true}
+              disabled={!isAuthorized}
               className="btn btn-sm btn-ghost px-1 text-2xl "
             >
               <AiOutlineDelete />

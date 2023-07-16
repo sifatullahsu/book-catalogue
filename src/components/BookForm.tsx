@@ -16,6 +16,7 @@ const BookForm = ({ data, handler }: iProps) => {
         <input
           type="text"
           name="book_name"
+          defaultValue={data?.name}
           className="input input-sm input-bordered w-full max-w-xs"
         />
       </div>
@@ -27,6 +28,7 @@ const BookForm = ({ data, handler }: iProps) => {
         <input
           type="text"
           name="author"
+          defaultValue={data?.author}
           className="input input-sm input-bordered w-full max-w-xs"
         />
       </div>
@@ -38,6 +40,7 @@ const BookForm = ({ data, handler }: iProps) => {
         <input
           type="date"
           name="publication_date"
+          defaultValue="2023-07-12"
           className="input input-sm input-bordered w-full max-w-xs"
         />
       </div>
@@ -46,7 +49,11 @@ const BookForm = ({ data, handler }: iProps) => {
         <label className="label">
           <span className="label-text">Genre</span>
         </label>
-        <select name="genre" className="select select-sm select-bordered">
+        <select
+          name="genre"
+          className="select select-sm select-bordered"
+          defaultValue={data ? data.genre : "Pick one"}
+        >
           <option disabled>Pick one</option>
           <option>Star Wars</option>
           <option>Harry Potter</option>
@@ -62,6 +69,7 @@ const BookForm = ({ data, handler }: iProps) => {
         </label>
         <textarea
           name="summery"
+          defaultValue={data?.summery}
           className="textarea textarea-bordered h-24"
         ></textarea>
       </div>
