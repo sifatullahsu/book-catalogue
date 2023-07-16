@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../redux/hooks";
 
 const Header = () => {
+  const { data: user } = useAppSelector((state) => state.user);
+
   const menu = () => {
     return (
       <>
@@ -10,15 +13,25 @@ const Header = () => {
         <li>
           <Link to="all-books">All Books</Link>
         </li>
-        <li>
-          <Link to="/signin">SignIn</Link>
-        </li>
-        <li>
-          <Link to="/signup">SignUp</Link>
-        </li>
-        <li>
-          <Link to="/add-new-book">Add New Book</Link>
-        </li>
+        {!user ? (
+          <>
+            <li>
+              <Link to="/signin">SignIn</Link>
+            </li>
+            <li>
+              <Link to="/signup">SignUp</Link>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/add-new-book">Add New Book</Link>
+            </li>
+            <li>
+              <button>Logout</button>
+            </li>
+          </>
+        )}
       </>
     );
   };

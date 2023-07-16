@@ -1,10 +1,13 @@
 import { ChangeEvent } from "react";
+import { toast } from "react-hot-toast";
 import BookForm from "../components/BookForm";
 import { useCreateBookMutation } from "../redux/features/book/bookApi";
+import { useAppSelector } from "../redux/hooks";
 import { iBook } from "../types/globalTypes";
 
 const AddNewBook = () => {
   const [createBook] = useCreateBookMutation();
+  const { data: user } = useAppSelector((state) => state.user);
 
   const handleAddNewBook = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -16,12 +19,11 @@ const AddNewBook = () => {
       publicationDate: form.publication_date.value,
       genre: form.genre.value,
       summery: form.summery.value,
-      user: "dd",
+      user: user?._id as string,
     };
 
-    await createBook(data)
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    await createBook(data);
+    toast.success("Book created successfull!");
   };
 
   return (

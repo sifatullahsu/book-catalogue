@@ -1,21 +1,21 @@
-import { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { HiOutlineBookOpen } from "react-icons/hi";
 import { Link, useParams } from "react-router-dom";
 import { useGetBookQuery } from "../redux/features/book/bookApi";
+import { useAppSelector } from "../redux/hooks";
 import { iBook } from "../types/globalTypes";
 
 const BookDetails = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetBookQuery(id);
-
-  const [isVisitor] = useState(true);
-  const [isAuthorized] = useState(false);
+  const { data: user } = useAppSelector((state) => state.user);
 
   if (isLoading) return <div>loading</div>;
 
   const book: iBook = data.data;
+  const isAuthorized = book.user === user?._id;
+  console.log(isAuthorized);
 
   return (
     <>
@@ -93,15 +93,15 @@ const BookDetails = () => {
               <textarea
                 className="textarea w-full textarea-bordered"
                 placeholder="Comment"
-                disabled={isVisitor}
+                disabled={!user}
               ></textarea>
               <button
-                disabled={isVisitor}
+                disabled={!user}
                 className="btn btn-primary btn-sm w-full text-xs"
               >
                 Submit Comment
               </button>
-              {isVisitor && (
+              {!user && (
                 <p className="text-red-600 text-sm">
                   Please login for the comment.
                 </p>

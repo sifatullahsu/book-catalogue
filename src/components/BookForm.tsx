@@ -7,6 +7,13 @@ type iProps = {
 };
 
 const BookForm = ({ data, handler }: iProps) => {
+  const date = new Date(data?.publicationDate as string);
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+
   return (
     <form onSubmit={handler}>
       <div className="form-control w-full max-w-xs">
@@ -40,7 +47,7 @@ const BookForm = ({ data, handler }: iProps) => {
         <input
           type="date"
           name="publication_date"
-          defaultValue="2023-07-12"
+          defaultValue={formattedDate}
           className="input input-sm input-bordered w-full max-w-xs"
         />
       </div>

@@ -3,7 +3,9 @@ import { useGetBooksQuery } from "../redux/features/book/bookApi";
 import { iBook } from "../types/globalTypes";
 
 const AllBooks = () => {
-  const { data, isLoading } = useGetBooksQuery(undefined);
+  const { data, isLoading } = useGetBooksQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
 
   if (isLoading) return <div>loading</div>;
 

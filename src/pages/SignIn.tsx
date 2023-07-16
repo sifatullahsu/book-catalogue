@@ -3,10 +3,13 @@ import { ChangeEvent } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useSignInUserMutation } from "../redux/features/user/userApi";
+import { setUser } from "../redux/features/user/userSlice";
+import { useAppDispatch } from "../redux/hooks";
 
 const SignIn = () => {
   const [signInUser] = useSignInUserMutation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleSignIn = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -23,6 +26,7 @@ const SignIn = () => {
         toast.success("Login Successfull.");
         form.reset();
         navigate("/");
+        dispatch(setUser(data?.data.data.user));
         localStorage.setItem("token", data?.data.data.accessToken);
       } else if (data?.error) {
         toast.error(data.error?.data?.message);

@@ -3,7 +3,9 @@ import { useGetBooksQuery } from "../redux/features/book/bookApi";
 import { iBook } from "../types/globalTypes";
 
 const Home = () => {
-  const { data } = useGetBooksQuery(undefined);
+  const { data } = useGetBooksQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
 
   return (
     <>

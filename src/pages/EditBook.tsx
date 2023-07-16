@@ -1,15 +1,19 @@
 import { ChangeEvent } from "react";
+import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import BookForm from "../components/BookForm";
 import {
   useGetBookQuery,
   useUpdateBookMutation,
 } from "../redux/features/book/bookApi";
+import { useAppSelector } from "../redux/hooks";
 import { iBook } from "../types/globalTypes";
 
 const EditBook = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetBookQuery(id);
+
+  const { data: user } = useAppSelector((state) => state.user);
 
   const [updateBook] = useUpdateBookMutation();
 
@@ -23,12 +27,11 @@ const EditBook = () => {
       publicationDate: form.publication_date.value,
       genre: form.genre.value,
       summery: form.summery.value,
-      user: "dd",
+      user: user?._id as string,
     };
 
-    await updateBook({ id, data })
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    await updateBook({ id, data });
+    toast.success("Book updated successfull!");
   };
 
   if (isLoading) return <div>loading</div>;
