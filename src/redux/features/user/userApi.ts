@@ -19,6 +19,13 @@ const userApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    updateUserReading: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/api/v1/users/${id as string}/reading`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
     signUpUser: builder.mutation({
       query: (data) => ({
         url: `/api/v1/auth/signup`,
@@ -48,6 +55,7 @@ export const {
   useGetUserQuery,
   useUpdateUserMutation,
   useUpdateUserWishlistMutation,
+  useUpdateUserReadingMutation,
   useSignUpUserMutation,
   useSignInUserMutation,
   useGetMeQuery,

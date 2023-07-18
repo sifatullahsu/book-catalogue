@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layouts/Main";
+import Protected from "../layouts/Protected";
 import AddNewBook from "../pages/AddNewBook";
 import AllBooks from "../pages/AllBooks";
 import BookDetails from "../pages/BookDetails";
@@ -29,7 +30,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/all-books/:id/edit",
-        element: <EditBook />,
+        element: (
+          <Protected>
+            <EditBook />
+          </Protected>
+        ),
       },
       {
         path: "/signin",
@@ -41,15 +46,27 @@ const routes = createBrowserRouter([
       },
       {
         path: "/add-new-book",
-        element: <AddNewBook />,
+        element: (
+          <Protected>
+            <AddNewBook />
+          </Protected>
+        ),
       },
       {
         path: "/wishlist",
-        element: <Wishlist />,
+        element: (
+          <Protected>
+            <Wishlist />
+          </Protected>
+        ),
       },
       {
         path: "/reading",
-        element: <Reading />,
+        element: (
+          <Protected>
+            <Reading />
+          </Protected>
+        ),
       },
     ],
   },

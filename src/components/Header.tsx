@@ -73,7 +73,9 @@ const Header = () => {
                 {menu()}
               </ul>
             </div>
-            <a className="normal-case text-lg font-medium">BookCatalogue</a>
+            <Link to="/" className="normal-case text-lg font-medium">
+              BookCatalogue
+            </Link>
           </div>
           <div className="navbar-end w-3/4">
             <ul className="menu menu-horizontal hidden lg:flex">{menu()}</ul>

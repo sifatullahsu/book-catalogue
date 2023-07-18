@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import BookGrid from "../components/BookGrid";
 import { useGetBooksQuery } from "../redux/features/book/bookApi";
 import { iBook } from "../types/globalTypes";
 
 const Home = () => {
-  const { data } = useGetBooksQuery(undefined, {
+  const { data } = useGetBooksQuery("limit=10", {
     refetchOnMountOrArgChange: true,
   });
 
@@ -34,9 +35,12 @@ const Home = () => {
             ))}
           </div>
           <div className="text-center pt-16">
-            <button className="btn btn-primary btn-sm text-xs px-16">
+            <Link
+              to="/all-books"
+              className="btn btn-primary btn-sm text-xs px-16"
+            >
               View More
-            </button>
+            </Link>
           </div>
         </div>
       </div>

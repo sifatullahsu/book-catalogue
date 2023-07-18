@@ -11,7 +11,9 @@ import { iBook } from "../types/globalTypes";
 
 const EditBook = () => {
   const { id } = useParams();
-  const { data, isLoading } = useGetBookQuery(id);
+  const { data, isLoading, isFetching } = useGetBookQuery(id, {
+    refetchOnMountOrArgChange: true,
+  });
 
   const { data: user } = useAppSelector((state) => state.user);
 
@@ -34,7 +36,7 @@ const EditBook = () => {
     toast.success("Book updated successfull!");
   };
 
-  if (isLoading) return <div>loading</div>;
+  if (isLoading || isFetching) return <div>loading</div>;
 
   return (
     <>

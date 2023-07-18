@@ -15,7 +15,10 @@ import {
   useGetBookQuery,
   useGetCommentQuery,
 } from "../redux/features/book/bookApi";
-import { useUpdateUserWishlistMutation } from "../redux/features/user/userApi";
+import {
+  useUpdateUserReadingMutation,
+  useUpdateUserWishlistMutation,
+} from "../redux/features/user/userApi";
 import { useAppSelector } from "../redux/hooks";
 import { iBook, iComment } from "../types/globalTypes";
 
@@ -27,6 +30,7 @@ const BookDetails = () => {
   const { data: user } = useAppSelector((state) => state.user);
   const [createComment] = useCreateCommentMutation();
   const [updateUserWishlist] = useUpdateUserWishlistMutation();
+  const [updateUserReading] = useUpdateUserReadingMutation();
   const [deleteBook] = useDeleteBookMutation();
 
   if (isLoading) return <div>loading</div>;
@@ -73,7 +77,13 @@ const BookDetails = () => {
     toast.success("Wishlist added successfull.");
   };
 
-  // const handleReading = () => {};
+  const handleReading = async () => {
+    await updateUserReading({
+      id: user?._id,
+      data: { book: id, stage: "Reading" },
+    });
+    toast.success("Reading added successfull.");
+  };
 
   return (
     <>
@@ -120,12 +130,17 @@ const BookDetails = () => {
               <AiOutlineDelete />
             </button>
             <button
+              disabled={!user?._id}
               onClick={handleWishlist}
               className="btn btn-sm btn-ghost px-1 text-2xl "
             >
               <AiOutlineHeart />
             </button>
-            <button className="btn btn-sm btn-ghost px-1 text-2xl ">
+            <button
+              disabled={!user?._id}
+              onClick={handleReading}
+              className="btn btn-sm btn-ghost px-1 text-2xl "
+            >
               <AiOutlineAppstoreAdd />
             </button>
           </div>
@@ -146,6 +161,9 @@ const BookDetails = () => {
                 </div>
               ))}
             </div>
+            {comment?.data.length === 0 && (
+              <div className="mt-5">No comments are added.</div>
+            )}
             <form onSubmit={handleComment} className="mt-5">
               <textarea
                 name="comment"

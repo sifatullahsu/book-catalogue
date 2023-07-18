@@ -24,6 +24,7 @@ const AddNewBook = () => {
 
     await createBook(data);
     toast.success("Book created successfull!");
+    form.reset();
   };
 
   return (
